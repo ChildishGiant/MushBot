@@ -1,8 +1,13 @@
 from asyncio import async
 import discord
+from urllib import request as requests
+import emote
 
 #create the client object, set cache_auth 
 client = discord.Client(cache_auth=False)
+
+#get a list of all global emotes
+emotes = requests.get("http://twitchemotes.com/api_cache/v2/global.json").json()
 
 with open('email.txt', 'r') as f:
 	email = f.read()
@@ -16,8 +21,12 @@ with open('password.txt', 'r') as f:
 async def on_message(msg):
 	if msg.author == client.user:
 		return
-	
+
 	if not msg.channel.is_private:
+
+		if msg in emotes:
+			emote(msg)
+
 		#logging messages
 		ts = msg.timestamp
 		targetfile = "logs/{}{}{}/{}.txt".format(ts.year,ts.month,ts.day,msg.channel.name)
