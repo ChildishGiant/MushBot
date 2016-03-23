@@ -2,6 +2,7 @@ from asyncio import async
 import discord
 from urllib import request as requests
 import emote
+import os
 
 #create the client object, set cache_auth 
 client = discord.Client(cache_auth=False)
@@ -27,7 +28,8 @@ async def on_message(msg):
 		if msg.content in emotes:
 			emote(msg)
 
-
+		if "lenny" in msg.content.lower():
+			client.send_message(msg.channel, "( ͡° ͜ʖ ͡°)")
 
 		#logging messages
 		ts = msg.timestamp
