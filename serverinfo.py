@@ -16,13 +16,13 @@ def adminRole(client):
 def modList(client):
     l = []
     for member in server(client).members:
-        if member.role == (modRole(client) or adminRole(client))
+        if member.role == (modRole(client) or adminRole(client)):
             l[len(l)+1] = member
     return l 
 
 def adminList(client):
     l = []
     for member in server(client).members:
-        if member.role == adminRole(client)
+        if member.role == adminRole(client):
             l[len(l)+1] = member
-    return l 
+    return l
