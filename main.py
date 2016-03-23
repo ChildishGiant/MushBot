@@ -24,8 +24,10 @@ async def on_message(msg):
 
 	if not msg.channel.is_private:
 
-		if msg in emotes:
+		if msg.content in emotes:
 			emote(msg)
+
+
 
 		#logging messages
 		ts = msg.timestamp
