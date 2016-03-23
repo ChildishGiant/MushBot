@@ -1,6 +1,3 @@
-import main
-
-
 def giveToken(dictName,user, token):
     if not dictName:
         return None
