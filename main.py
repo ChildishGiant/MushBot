@@ -1,3 +1,4 @@
+from asyncio import async
 import discord
 
 #create the client object, set cache_auth 
@@ -17,6 +18,26 @@ async def on_message(msg):
 		return
 	
 	if not msg.channel.is_private:
+		#logging messages
+		ts = msg.timestamp
+		targetfile = "logs/{}{}{}/{}.txt".format(ts.year,ts.month,ts.day,msg.channel.name)
+		#message format is [hh:mm] auhor - (id): message
+		formattedline = "[{}:{}] {} - ({}): ".format(ts.hour, ts.minute, msg.author.name, msg.author.id)
+		if len(msg.attachments) > 0:
+			embedslinks = ""
+			for embed in msg.attachments:
+				embedslinks += "attachment({}) ".format(embed['url'])
+			formattedline += embedslinks
+		else:
+			formattedline += msg.content
+		#create a folder for the day if there isn't already one
+		if not os.path.isdir("{}{}{}".format(ts.year,ts.month,ts.day)):
+			os.mkdir("{}{}{}".format(ts.year,ts.month,ts.day))
+		#use UTF-8 encoding to handle non-ascii names
+		with open(targetfile, "ab") as f:
+			f.write((formattedline+"\n").encode('utf-8'))
+		
+		#command handling
 		if msg.startswith('!'):
 			args = msg.split()
 			#command is the first word in the message
