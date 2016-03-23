@@ -1,7 +1,6 @@
 from asyncio import async
 import discord
 from urllib import request as requests
-import emote
 import os
 
 #create the client object, set cache_auth 
