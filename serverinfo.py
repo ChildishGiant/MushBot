@@ -13,6 +13,12 @@ def adminRole(client):
         if role.name == "Admin":
             return role
 
+def codererRole(client):
+    for role in server(client):
+        if role.name == "Coderer":
+            return role
+
+
 def modList(client):
     l = []
     for member in server(client).members:
@@ -24,5 +30,12 @@ def adminList(client):
     l = []
     for member in server(client).members:
         if member.role == adminRole(client):
+            l[len(l)+1] = member
+    return l
+
+def codererList(client):
+    l = []
+    for member in server(client).members:
+        if member.role == codererRole(client):
             l[len(l)+1] = member
     return l
