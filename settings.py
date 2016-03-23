@@ -1,0 +1,1 @@
+commandCooldownTime = 15
