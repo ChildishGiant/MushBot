@@ -2,9 +2,14 @@ from asyncio import async
 import discord
 from urllib import request as requests
 import os
+import tokens
+import serverinfo
+import threading
+import settings
 
 #create the client object, set cache_auth 
 client = discord.Client(cache_auth=False)
+
 
 with open('email.txt', 'r') as f:
 	email = f.read()
@@ -43,8 +48,15 @@ async def on_message(msg):
 		with open(targetfile, "ab") as f:
 			f.write((formattedline+"\n").encode('utf-8'))
 		
-		#command handling
-		if msg.startswith('!'):
+		#command handleing + making sure they're not on cooldown
+		if msg.startswith('!') and not naughtyList[msg.author]:
+
+			#command cooldown
+			global naughtyList
+			naughtyList = {}
+			tokens.giveToken(naughtyList,msg.author,"")
+			threading.Timer(settings.commandCooldownTime,tokens.takeToken(naughtyList,msg.author))
+
 			args = msg.split()
 			#command is the first word in the message
 			command = args[0]
