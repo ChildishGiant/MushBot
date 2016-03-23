@@ -27,7 +27,8 @@ async def on_message(msg):
 		if msg.content in emotes:
 			emote(msg)
 
-
+		if "lenny" in msg.content.lower():
+			client.send_message(msg.channel, "( ͡° ͜ʖ ͡°)")
 
 		#logging messages
 		ts = msg.timestamp
