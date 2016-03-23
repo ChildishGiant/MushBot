@@ -7,9 +7,6 @@ import os
 #create the client object, set cache_auth 
 client = discord.Client(cache_auth=False)
 
-#get a list of all global emotes
-emotes = requests.get("http://twitchemotes.com/api_cache/v2/global.json").json()
-
 with open('email.txt', 'r') as f:
 	email = f.read()
 
@@ -24,9 +21,6 @@ async def on_message(msg):
 		return
 
 	if not msg.channel.is_private:
-
-		if msg.content in emotes:
-			emote(msg)
 
 		if "lenny" in msg.content.lower():
 			client.send_message(msg.channel, "( ͡° ͜ʖ ͡°)")
