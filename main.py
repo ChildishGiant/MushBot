@@ -1,3 +1,4 @@
+from asyncio import async
 import discord
 
 #create the client object, set cache_auth 
