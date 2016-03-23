@@ -26,8 +26,11 @@ async def on_message(msg):
 
 	if not msg.channel.is_private:
 
-		if "lenny" in msg.content.lower():
-			client.send_message(msg.channel, "( ͡° ͜ʖ ͡°)")
+		for meme in settings.textCommands:
+			if meme in msg.content.lower():
+				await client.send_message(msg.channel, settings.textCommands[meme])
+
+
 
 		#logging messages
 		ts = msg.timestamp
@@ -51,11 +54,12 @@ async def on_message(msg):
 		#command handleing + making sure they're not on cooldown
 		if msg.startswith('!') and not naughtyList[msg.author]:
 
-			#command cooldown
-			global naughtyList
-			naughtyList = {}
-			tokens.giveToken(naughtyList,msg.author,"")
-			threading.Timer(settings.commandCooldownTime,tokens.takeToken(naughtyList,msg.author))
+			#command cooldown for those not worthy enough.
+			if msg.author not in (serverinfo.modList(client) or serverinfo.codererList()):
+				global naughtyList
+				naughtyList = {}
+				tokens.giveToken(naughtyList,msg.author,"")
+				threading.Timer(settings.commandCooldownTime,tokens.takeToken(naughtyList,msg.author))
 
 			args = msg.split()
 			#command is the first word in the message
