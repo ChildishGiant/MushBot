@@ -7,6 +7,7 @@ def getServerByName(client, n):
 def makeBlankFile(filename):
     #checks to see if file exists
     if os.path.isfile(filename):
+        return None
     else:
         #make file
         open(filename, 'a').close()
