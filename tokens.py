@@ -15,5 +15,5 @@ def checkToken(dictName, user):
     try:
         if dictName[user]:
             return True
-    except NameError:
+    except KeyError:
         return False
