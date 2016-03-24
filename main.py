@@ -1,4 +1,5 @@
 from asyncio import async
+from urllib import request as requests
 import discord
 import urllib
 import os
@@ -13,6 +14,7 @@ import settings
 
 #create the client object, set cache_auth
 client = discord.Client(cache_auth=False)
+naughtyList = {}
 
 #create naughtyList
 naughtyList = {}
