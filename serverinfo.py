@@ -22,20 +22,20 @@ def codererRole(client):
 def modList(client):
     l = []
     for member in server(client).members:
-        if member.role == (modRole(client) or adminRole(client)):
+        if (modRole(client) or adminRole(client)) in member.roles:
             l[len(l)+1] = member
     return l
 
 def adminList(client):
     l = []
     for member in server(client).members:
-        if member.role == adminRole(client):
+        if adminRole(client) in member.roles:
             l[len(l)+1] = member
     return l
 
 def codererList(client):
     l = []
     for member in server(client).members:
-        if member.role == codererRole(client):
+        if codererRole(client) in member.roles:
             l[len(l)+1] = member
     return l
