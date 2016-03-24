@@ -34,7 +34,6 @@ while True:
 		#create shekels list (they're called points in the code because it's easier to type and I keep typing SHMEKELS)
 		_util.makeBlankFile("points.txt")
 		for member in serverinfo.server(client).members
-			if member.
 			points.give(msg.author, 1)
 
 #on_message event, triggers anytime a message is received on a channel the client can see
