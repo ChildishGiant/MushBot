@@ -62,7 +62,7 @@ async def on_message(msg):
 			f.write((formattedline+"\n").encode('utf-8'))
 
 		#Checks if the user is on cooldown
-		if not naughtyList[msg.author]:
+		if not checkToken(naughtyList,msg.author):
 
 			#Check for all text commands
 			for meme in settings.textCommands:
