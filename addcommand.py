@@ -1,6 +1,8 @@
 import settings
 
 
-def run(call,response):
+def run(client, msg, args):
+    call = args[0]
+    response = args[1]
     settings.textCommands[call]=response
     return None
