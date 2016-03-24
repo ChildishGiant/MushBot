@@ -81,7 +81,7 @@ async def on_message(msg):
 			for line in lines:
 				if line == "":
 					break
-				meme = line.split("|DIVIDER|")
+				meme = line.split(settings.divider)
 				if meme[0] in msg.content.lower():
 					await client.send_message(msg.channel, meme[1])
 
