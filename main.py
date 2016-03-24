@@ -11,7 +11,6 @@ from urllib import request as requests
 import threading
 import settings
 
-
 #create the client object, set cache_auth
 client = discord.Client(cache_auth=False)
 naughtyList = {}
@@ -32,6 +31,7 @@ emotes = json.loads(r.read().decode(r.info().get_param('charset') or 'utf-8'))
 #msg - the object representing the message received
 @client.event
 async def on_message(msg):
+	global naughtyList
 	if msg.author == client.user:
 		return
 
@@ -76,7 +76,6 @@ async def on_message(msg):
 
 				#command cooldown for those not worthy enough.
 				if msg.author not in (serverinfo.modList(client) or serverinfo.codererList()):
-					global naughtyList
 					tokens.giveToken(naughtyList,msg.author,"")
 					threading.Timer(settings.commandCooldownTime,tokens.takeToken(naughtyList,msg.author))
 
