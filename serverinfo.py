@@ -1,7 +1,7 @@
 import _util
 
 def server(client):
-    return _util.getServerByName(client,"The Binding Of Isaac")
+    return _util.getServerByName(client,"The Binding of Isaac")
 
 def modRole(client):
     for role in server(client):
@@ -24,7 +24,7 @@ def modList(client):
     for member in server(client).members:
         if member.role == (modRole(client) or adminRole(client)):
             l[len(l)+1] = member
-    return l 
+    return l
 
 def adminList(client):
     l = []
