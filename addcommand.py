@@ -12,7 +12,7 @@ async def run(client, msg, args):
                 a.write((call+"|DIVIDER|"+response+os.linesep).encode('utf-8'))
                 await client.send_message(msg.channel, "Added command:`"+call+"`")
         else:
-            await client.send_message(msg.channel, "Example: `!addcommand lenny ( ͡° ͜ʖ ͡°)`")
+            await client.send_message(msg.channel, "Example: `" + settings.activator + "addcommand lenny ( ͡° ͜ʖ ͡°)`")
     else:
         #if they're trying to break it.
         await client.send_message(msg.channel, settings.malicous)
