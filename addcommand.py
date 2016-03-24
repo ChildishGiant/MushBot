@@ -1,8 +1,15 @@
+import os
 import settings
 
-
 def run(client, msg, args):
-    call = args[0]
-    response = args[1]
-    settings.textCommands[call]=response
-    return None
+    if "|DIVIDER|" not in msg.content:
+        if len(args) == "2":
+            call = args[0]
+            response = args[1]
+            with open("ascii.txt", "") as a
+                a.write(call+"|DIVIDER|"+response+os.linesep)
+                return "Added command:`"+settings.activator+call+"`"
+        else:
+            return "Example: `!addcommand lenny ( ͡° ͜ʖ ͡°)`"
+    else:
+        return settings.malicous
