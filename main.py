@@ -9,7 +9,7 @@ import serverinfo
 import threading
 import settings
 
-#create the client object, set cache_auth 
+#create the client object, set cache_auth
 client = discord.Client(cache_auth=False)
 
 with open('email.txt', 'r') as f:
@@ -32,11 +32,11 @@ async def on_message(msg):
 
 		if "lenny" in msg.content.lower():
 			await client.send_message(msg.channel, "( ͡° ͜ʖ ͡°)")
-			
+
 		if msg.content in emotes["emotes"]:
 			em = emote.emote(msg)
 			await client.send_file(em[0], em[1])
-		
+
 		#logging messages
 		ts = msg.timestamp
 		targetfile = "logs/{}{}{}/{}.txt".format(ts.year,ts.month,ts.day,msg.channel.name)
@@ -55,7 +55,7 @@ async def on_message(msg):
 		#use UTF-8 encoding to handle non-ascii names
 		with open(targetfile, "ab") as f:
 			f.write((formattedline+"\n").encode('utf-8'))
-		
+
 		#Checks if the user is on cooldown
 		if not naughtyList[msg.author]:
 
@@ -109,11 +109,11 @@ async def on_message(msg):
 
 					if os.path.isfile(imagefile+'.gif'):
 						await client.send_file(c, imagefile+'.gif')
-	
+
 #on_ready event, triggers once the client is logged in and ready.
 @client.event
 async def on_ready():
 	print("Client is running as {}".format(client.user.name))
-	
+
 print("Starting bot...")
 client.run(email, password)
