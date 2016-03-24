@@ -62,6 +62,7 @@ async def on_message(msg):
 		if not tokens.checkToken(naughtyList,msg.author):
 
 			#Check for all text commands
+			_util.makeBlankFile("ascii.txt")
 			lines = tuple(open("ascii.txt", 'r'))
 			for line in lines:
 				meme = line.split("|DIVIDER|")
