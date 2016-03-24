@@ -59,7 +59,7 @@ async def on_message(msg):
 			f.write((formattedline+"\n").encode('utf-8'))
 
 		#Checks if the user is on cooldown
-		if not checkToken(naughtyList,msg.author):
+		if not tokens.checkToken(naughtyList,msg.author):
 
 			#Check for all text commands
 			lines = tuple(open("ascii.txt", 'r'))
