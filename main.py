@@ -36,7 +36,7 @@ while True:
 		for member in serverinfo.server(client).members
 			#checks if user is active
 			if member.status == discord.status.online:
-				points.give(msg.author, 1)
+				points.give("points.txt", msg.author, 1)
 
 #on_message event, triggers anytime a message is received on a channel the client can see
 #msg - the object representing the message received
