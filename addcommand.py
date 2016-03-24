@@ -10,7 +10,7 @@ async def run(client, msg, args):
             response = " ".join(args[1:])
             with open("ascii.txt", "ab") as a:
                 a.write((call+"|DIVIDER|"+response+os.linesep).encode('utf-8'))
-                await client.send_message(msg.channel, "Added command:`"+settings.activator+call+"`")
+                await client.send_message(msg.channel, "Added command:`"+call+"`")
         else:
             await client.send_message(msg.channel, "Example: `!addcommand lenny ( ͡° ͜ʖ ͡°)`")
     else:
