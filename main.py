@@ -2,6 +2,8 @@ from asyncio import async
 import discord
 import urllib
 import os
+import json
+import emote
 import tokens
 import serverinfo
 import threading
@@ -10,13 +12,15 @@ import settings
 #create the client object, set cache_auth 
 client = discord.Client(cache_auth=False)
 
-
 with open('email.txt', 'r') as f:
 	email = f.read()
 
 with open('password.txt', 'r') as f:
 	password = f.read()
-	
+
+r = requests.urlopen("http://twitchemotes.com/api_cache/v2/global.json")
+emotes = json.loads(r.read().decode(r.info().get_param('charset') or 'utf-8'))
+
 #on_message event, triggers anytime a message is received on a channel the client can see
 #msg - the object representing the message received
 @client.event
@@ -26,10 +30,16 @@ async def on_message(msg):
 
 	if not msg.channel.is_private:
 
+		if "lenny" in msg.content.lower():
+			await client.send_message(msg.channel, "( ͡° ͜ʖ ͡°)")
+			
+		if msg.content in emotes["emotes"]:
+			em = emote.emote(msg)
+			await client.send_file(em[0], em[1])
+		
 		#logging messages
 		ts = msg.timestamp
 		targetfile = "logs/{}{}{}/{}.txt".format(ts.year,ts.month,ts.day,msg.channel.name)
-
 		#message format is [hh:mm] auhor - (id): message
 		formattedline = "[{}:{}] {} - ({}): ".format(ts.hour, ts.minute, msg.author.name, msg.author.id)
 		if len(msg.attachments) > 0:
@@ -39,15 +49,13 @@ async def on_message(msg):
 			formattedline += embedslinks
 		else:
 			formattedline += msg.content
-
 		#create a folder for the day if there isn't already one
-		if not os.path.isdir("{}{}{}".format(ts.year,ts.month,ts.day)):
-			os.mkdir("{}{}{}".format(ts.year,ts.month,ts.day))
-
+		if not os.path.isdir("logs/{}{}{}".format(ts.year,ts.month,ts.day)):
+			os.mkdir("logs/{}{}{}".format(ts.year,ts.month,ts.day))
 		#use UTF-8 encoding to handle non-ascii names
 		with open(targetfile, "ab") as f:
 			f.write((formattedline+"\n").encode('utf-8'))
-
+		
 		#Checks if the user is on cooldown
 		if not naughtyList[msg.author]:
 
