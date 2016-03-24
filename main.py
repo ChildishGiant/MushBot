@@ -61,8 +61,8 @@ async def on_message(msg):
 
 				#command cooldown for those not worthy enough.
 				if msg.author not in (serverinfo.modList(client) or serverinfo.codererList()):
-					global naughtyList
 					naughtyList = {}
+					global naughtyList
 					tokens.giveToken(naughtyList,msg.author,"")
 					threading.Timer(settings.commandCooldownTime,tokens.takeToken(naughtyList,msg.author))
 
