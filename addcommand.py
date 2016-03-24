@@ -2,17 +2,17 @@ import os
 import settings
 import _util
 
-def run(client, msg, args):
+async def run(client, msg, args):
     _util.makeBlankFile("ascii.txt")
     if "|DIVIDER|" not in msg.content:
-        if len(args) == "2":
+        if len(args) > 2:
             call = args[0]
-            response = args[1]
-            with open("ascii.txt", "") as a
-                a.write(call+"|DIVIDER|"+response+os.linesep)
-                return "Added command:`"+settings.activator+call+"`"
+            response = " ".join(args[1:])
+            with open("ascii.txt", "ab") as a:
+                a.write((call+"|DIVIDER|"+response+os.linesep).encode('utf-8'))
+                await client.send_message(msg.channel, "Added command:`"+settings.activator+call+"`")
         else:
-            return "Example: `!addcommand lenny ( ͡° ͜ʖ ͡°)`"
+            await client.send_message(msg.channel, "Example: `!addcommand lenny ( ͡° ͜ʖ ͡°)`")
     else:
         #if they're trying to break it.
-        return settings.malicous
+        await client.send_message(msg.channel, settings.malicous)

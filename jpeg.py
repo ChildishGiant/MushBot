@@ -7,7 +7,7 @@ import requests
 import shutil
 import random
 
-def run(client, msg, args):
+async def run(client, msg, args):
     #jpeg quality
     qual = 5
     #how many times to distort random chunks

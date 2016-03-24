@@ -1,3 +1,4 @@
+import os.path
 
 def getServerByName(client, n):
     for server in client.servers:

@@ -1,7 +1,9 @@
 from asyncio import async
 from urllib import request as requests
+from imp import reload
 import discord
 import urllib
+import _util
 import os
 import json
 import emote
@@ -63,14 +65,16 @@ async def on_message(msg):
 
 			#Check for all text commands
 			_util.makeBlankFile("ascii.txt")
-			lines = tuple(open("ascii.txt", 'r'))
+			lines = open("ascii.txt", 'rb').read().decode("utf-8").split(os.linesep)
 			for line in lines:
+				if line == "":
+					break
 				meme = line.split("|DIVIDER|")
 				if meme[0] in msg.content.lower():
 					await client.send_message(msg.channel, meme[1])
 
 			#command handleing
-			if msg.content.startswith(settings.activator) :
+			if msg.content.startswith(settings.activator):
 
 				#command cooldown for those not worthy enough.
 				if msg.author not in (serverinfo.modList(client) or serverinfo.codererList()):
@@ -78,14 +82,14 @@ async def on_message(msg):
 					threading.Timer(settings.commandCooldownTime,tokens.takeToken(naughtyList,msg.author))
 
 				#command is the first word in the message
-				args = msg.split()
-				command = args[0]
+				args = msg.content.split()
+				cmd = args[0]
 
 				#check for a corresponding .py file
-				if os.path.isfile(command.replace('!','')+'.py'):
+				if os.path.isfile(cmd.replace('!','')+'.py'):
 
 					#Get the appropriate module name for the command. Caps matter, so all lower case
-					module = command.replace('!','').lower()
+					module = cmd.replace('!','').lower()
 
 					#dynamically import the module required, then refresh it to make sure we're running the newest possible code
 					command = __import__(module)
