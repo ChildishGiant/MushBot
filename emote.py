@@ -17,6 +17,6 @@ def emote(msg):
             with open("emotes/"+em+".png", 'wb') as f:
                 r.raw.decode_content = True
                 shutil.copyfileobj(r.raw, f)
-        return msg.channel, "emotes/" + em + ".png"
+        return msg.channel, msg.author.mention + "emotes/" + em + ".png"
     else:
         print("Emote " + em + " returned status code " + r.status_code)
