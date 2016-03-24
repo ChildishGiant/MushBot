@@ -9,8 +9,12 @@ import serverinfo
 import threading
 import settings
 
+
 #create the client object, set cache_auth
 client = discord.Client(cache_auth=False)
+
+#create naughtyList
+naughtyList = {}
 
 with open('email.txt', 'r') as f:
 	email = f.read()
@@ -69,7 +73,6 @@ async def on_message(msg):
 
 				#command cooldown for those not worthy enough.
 				if msg.author not in (serverinfo.modList(client) or serverinfo.codererList()):
-					naughtyList = {}
 					global naughtyList
 					tokens.giveToken(naughtyList,msg.author,"")
 					threading.Timer(settings.commandCooldownTime,tokens.takeToken(naughtyList,msg.author))
