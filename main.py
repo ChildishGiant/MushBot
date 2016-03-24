@@ -70,7 +70,7 @@ async def on_message(msg):
 					await client.send_message(msg.channel, meme[1])
 
 			#command handleing
-			if msg.startswith(settings.activator) :
+			if msg.content.startswith(settings.activator) :
 
 				#command cooldown for those not worthy enough.
 				if msg.author not in (serverinfo.modList(client) or serverinfo.codererList()):
