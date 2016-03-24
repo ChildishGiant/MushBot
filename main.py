@@ -1,6 +1,6 @@
 from asyncio import async
 import discord
-from urllib import request as requests
+import urllib
 import os
 import tokens
 import serverinfo
@@ -82,7 +82,8 @@ async def on_message(msg):
 
 					#actually run the command, command.py file must have a run() method that takes these 4 arguments
 					try:
-						await command.run(client, msg.channel, msg.author, args[1:])
+						await command.run(client, msg, args[1:])
+					#catching errors due to files not having a run()
 					except NameError:
 						await client.send_message(msg.channel, settings.invalidCommand)
 				else:
