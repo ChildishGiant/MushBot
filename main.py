@@ -7,13 +7,11 @@ import json
 import emote
 import tokens
 import serverinfo
-from urllib import request as requests
 import threading
 import settings
 
 #create the client object, set cache_auth
 client = discord.Client(cache_auth=False)
-naughtyList = {}
 
 #create naughtyList
 naughtyList = {}
