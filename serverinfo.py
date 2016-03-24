@@ -4,17 +4,17 @@ def server(client):
     return _util.getServerByName(client,"The Binding of Isaac")
 
 def modRole(client):
-    for role in server(client):
+    for role in server(client).roles:
         if role.name == "Moderator":
             return role
 
 def adminRole(client):
-    for role in server(client):
+    for role in server(client).roles:
         if role.name == "Admin":
             return role
 
 def codererRole(client):
-    for role in server(client):
+    for role in server(client).roles:
         if role.name == "Coderer":
             return role
 
