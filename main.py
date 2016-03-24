@@ -35,9 +35,6 @@ async def on_message(msg):
 
 	if not msg.channel.is_private:
 
-		if "lenny" in msg.content.lower():
-			await client.send_message(msg.channel, "( ͡° ͜ʖ ͡°)")
-
 		if msg.content in emotes["emotes"]:
 			em = emote.emote(msg)
 			await client.send_file(em[0], em[1])
