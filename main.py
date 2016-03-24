@@ -74,7 +74,7 @@ async def on_message(msg):
 
 				#command cooldown for those not worthy enough.
 				if msg.author not in (serverinfo.modList(client) or serverinfo.codererList()):
-					tokens.giveToken(naughtyList,msg.author,"")
+					tokens.giveToken(naughtyList,msg.author,True)
 					threading.Timer(settings.commandCooldownTime,tokens.takeToken(naughtyList,msg.author))
 
 				#command is the first word in the message
