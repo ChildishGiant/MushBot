@@ -61,7 +61,6 @@ target/
 #Ipython Notebook
 .ipynb_checkpoints
 <<<<<<< HEAD
-*.txt
 =======
 /.idea/
 >>>>>>> refs/remotes/origin/master
