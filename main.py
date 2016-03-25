@@ -55,7 +55,7 @@ async def on_message(msg):
 
 		#logging messages
 		ts = msg.timestamp
-		targetfile = "logs/{}{}{}/{}.txt".format(ts.year,ts.month,ts.day,msg.channel.name)
+		targetfile = "data/logs/{}{}{}/{}.txt".format(ts.year,ts.month,ts.day,msg.channel.name)
 		#message format is [hh:mm] auhor - (id): message
 		formattedline = "[{}:{}] {} - ({}): ".format(ts.hour, ts.minute, msg.author.name, msg.author.id)
 		if len(msg.attachments) > 0:
@@ -66,8 +66,8 @@ async def on_message(msg):
 		else:
 			formattedline += msg.content
 		#create a folder for the day if there isn't already one
-		if not os.path.isdir("logs/{}{}{}".format(ts.year,ts.month,ts.day)):
-			os.mkdir("logs/{}{}{}".format(ts.year,ts.month,ts.day))
+		if not os.path.isdir("data/logs/{}{}{}".format(ts.year,ts.month,ts.day)):
+			os.mkdir("data/logs/{}{}{}".format(ts.year,ts.month,ts.day))
 		#use UTF-8 encoding to handle non-ascii names
 		with open(targetfile, "ab") as f:
 			f.write((formattedline+"\n").encode('utf-8'))
@@ -76,8 +76,8 @@ async def on_message(msg):
 		if not tokens.checkToken(naughtyList,msg.author):
 
 			#Check for all text commands
-			_util.makeBlankFile("ascii.txt")
-			lines = open("ascii.txt", 'rb').read().decode("utf-8").split(os.linesep)
+			_util.makeBlankFile("data/ascii.txt")
+			lines = open("data/ascii.txt", 'rb').read().decode("utf-8").split(os.linesep)
 			for line in lines:
 				if line == "":
 					break
