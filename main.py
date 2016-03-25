@@ -98,10 +98,10 @@ async def on_message(msg):
 				cmd = args[0]
 
 				#check for a corresponding .py file
-				if os.path.isfile(cmd.replace('!','')+'.py'):
+				if os.path.isfile(cmd.replace(settings.activator,'')+'.py'):
 
 					#Get the appropriate module name for the command. Caps matter, so all lower case
-					module = cmd.replace('!','').lower()
+					module = cmd.replace(settings.activator,'').lower()
 
 					#dynamically import the module required, then refresh it to make sure we're running the newest possible code
 					command = __import__(module)
@@ -118,7 +118,7 @@ async def on_message(msg):
 					if ('.'or '/') in args[0]: #no sketchy folder tricks.
 						return settings.malicious
 
-					imagefile = 'images/'+args[0].replace('!','')
+					imagefile = 'images/'+args[0].replace(settings.activator,'')
 
 					if os.path.isfile(imagefile+'.jpg'):
 						await client.send_file(msg.channel, imagefile+'.jpg')
