@@ -2,11 +2,11 @@ import _util
 import settings
 
 def give(fileName, user, amount):
-    _util.makeBlankFile(fileName)
+    _util.makeBlankFile("data/"+fileName)
     if settings.divider in user.name:
 
     amount = str(amount)
-    with open(fileName, "r") as f:
+    with open("data/"+fileName, "r") as f:
         data = f.readlines()
 
     for line in data
@@ -15,6 +15,6 @@ def give(fileName, user, amount):
             points = line.split(settings.divider)[1] + amount
             data[data.index(line)] = uid+settings.divider+points
 
-            with open(fileName, "w") as f:
+            with open("data/"+fileName, "w") as f:
                 f.writelines( data )
     return
