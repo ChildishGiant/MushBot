@@ -6,4 +6,4 @@ def run(client, msg, args):
     tree = html.fromstring(page.content)
     tics = tree.xpath('//a[@class="tic-title-link"]/text()')
     firstSaid = tree.xpath('//li[@class="ticmeta_startyear"]/text()')
-    print("{0} - {1}. Please support Touretteshero at http://www.touretteshero.com/donate/".format(tics[0].encode("utf-8"),firstSaid[0]))
+    return msg.channel "{0} - {1}. Please support Touretteshero at http://www.touretteshero.com/donate/".format(tics[0].encode("utf-8"),firstSaid[0])
