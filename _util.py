@@ -1,4 +1,5 @@
 import os.path
+from urllib import request as requests
 
 def getServerByName(client, n):
     for server in client.servers:
@@ -12,3 +13,7 @@ def makeBlankFile(filename):
     else:
         #make file
         open(filename, 'a').close()
+
+def getResponseCode(url):
+    conn = urllib.requests.urlopen(url)
+    return conn.getcode()

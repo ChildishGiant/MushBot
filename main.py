@@ -115,8 +115,8 @@ async def on_message(msg):
 						await client.send_message(msg.channel, settings.invalidCommand)
 				else:
 					#no command.py file, instead check for a matching image file in the images folder and upload it.
-					if '.' in args[0] or '/' in args[0]: #no sketchy folder tricks.
-						return
+					if ('.'or '/') in args[0]: #no sketchy folder tricks.
+						return settings.malicious
 
 					imagefile = 'images/'+args[0].replace('!','')
 
