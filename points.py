@@ -4,12 +4,12 @@ import settings
 def give(fileName, user, amount):
     _util.makeBlankFile("data/"+fileName)
     if settings.divider in user.name:
-
+        return settings.malicious
     amount = str(amount)
     with open("data/"+fileName, "r") as f:
         data = f.readlines()
 
-    for line in data
+    for line in data:
         if line.startswith(user.id):
             uid = line.split(settings.divider)[0]
             points = line.split(settings.divider)[1] + amount
