@@ -67,3 +67,6 @@ target/
 *.png
 *.jpg
 *.gif
+data/logs/
+email.txt
+password.txt
