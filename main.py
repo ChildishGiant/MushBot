@@ -121,13 +121,13 @@ async def on_message(msg):
 					imagefile = 'images/'+args[0].replace('!','')
 
 					if os.path.isfile(imagefile+'.jpg'):
-						await client.send_file(c, imagefile+'.jpg')
+						await client.send_file(msg.channel, imagefile+'.jpg')
 
 					if os.path.isfile(imagefile+'.png'):
-						await client.send_file(c, imagefile+'.png')
+						await client.send_file(msg.channel, imagefile+'.png')
 
 					if os.path.isfile(imagefile+'.gif'):
-						await client.send_file(c, imagefile+'.gif')
+						await client.send_file(msg.channel, imagefile+'.gif')
 
 #on_ready event, triggers once the client is logged in and ready.
 @client.event
