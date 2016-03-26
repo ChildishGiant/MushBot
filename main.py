@@ -50,7 +50,6 @@ async def on_message(msg):
 
 		if msg.content in emotes["emotes"]:
 			em = emote.emote(msg)
-			await client.send_message(em[0], em[1])
 			await client.send_file(em[0], em[2])
 
 		#logging messages
