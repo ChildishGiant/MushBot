@@ -19,6 +19,7 @@ def give(fileName, user, amount):
             with open("data/"+fileName, "w") as f:
                 f.writelines( data )
     return
+
 #only to be called in a thread.
 def tip():
     while True:
