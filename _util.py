@@ -1,4 +1,5 @@
 import os.path
+import time
 from urllib import request as requests
 
 def getServerByName(client, n):
@@ -17,3 +18,7 @@ def makeBlankFile(filename):
 def getResponseCode(url):
     conn = urllib.requests.urlopen(url)
     return conn.getcode()
+
+def wait(s,function,args):
+    time.sleep(s)
+    function(args)
