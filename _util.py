@@ -1,5 +1,6 @@
 import os.path
 import cleverbot
+import time
 from urllib import request as requests
 
 cb1 = cleverbot.Cleverbot()
@@ -23,3 +24,7 @@ def makeBlankFile(filename):
 def getResponseCode(url):
     conn = urllib.requests.urlopen(url)
     return conn.getcode()
+
+def wait(s,function,args):
+    time.sleep(s)
+    function(args)
