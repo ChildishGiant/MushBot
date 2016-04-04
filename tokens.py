@@ -1,16 +1,20 @@
-def giveToken(dictName,user, token):
-    dictName[user] = token
-    return dictName
+naughtyList = {}
 
-def takeToken(dictName, user):
-    if dictName[user]:
-        del dictName[user]
+def giveToken(user,token):
+    global naughtyList
+    naughtyList[str(user)] = token
+
+def takeToken(user):
+    global naughtyList
+    if naughtyList[str(user)]:
+        del naughtyList[str(user)]
     else:
         return None
 
-def checkToken(dictName, user):
+def checkToken(user):
+    global naughtyList
     try:
-        if dictName[user]:
+        if naughtyList[str(user)]:
             return True
     except KeyError:
         return False

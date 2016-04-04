@@ -3,7 +3,7 @@ import settings
 import _util
 
 async def run(client, msg, args):
-    if msg.author in serverinfo.modList or serverinfo.codererList:
+    if msg.author.id in serverinfo.modList or serverinfo.codererList:
         _util.makeBlankFile("ascii.txt")
         if settings.divider not in msg.content:
             if len(args) > 2:

@@ -17,9 +17,6 @@ import points
 #create the client object, set cache_auth
 client = discord.Client(cache_auth=False)
 
-#create naughtyList
-naughtyList = {}
-
 with open('email.txt', 'r') as f:
 	email = f.read()
 
@@ -42,7 +39,6 @@ while True:
 #msg - the object representing the message received
 @client.event
 async def on_message(msg):
-	global naughtyList
 	if msg.author == client.user:
 		return
 
@@ -72,7 +68,7 @@ async def on_message(msg):
 			f.write((formattedline+"\n").encode('utf-8'))
 
 		#Checks if the user is on cooldown
-		if not tokens.checkToken(naughtyList,msg.author):
+		if not tokens.checkToken(msg.author.id):
 
 			#Check for all text commands
 			_util.makeBlankFile("data/ascii.txt")
@@ -81,16 +77,16 @@ async def on_message(msg):
 				if line == "":
 					break
 				meme = line.split(settings.divider)
-				if meme[0] in msg.content.lower():
+				if meme[0] in msg.content and "commands allowed" in msg.channel.topic:
 					await client.send_message(msg.channel, meme[1])
 
 			#command handleing
-			if msg.content.startswith(settings.activator):
+			if msg.content.startswith(settings.activator) and ("commands allowed" in msg.channel.topic or ((msg.author in serverinfo.modList(client)) or (msg.author in serverinfo.codererList(client)))):
 
 				#command cooldown for those not worthy enough.
 				if msg.author not in (serverinfo.modList(client) or serverinfo.codererList()):
-					tokens.giveToken(naughtyList,msg.author, True)
-					threading.Timer(settings.commandCooldownTime,tokens.takeToken(naughtyList,msg.author))
+					tokens.giveToken(msg.author.id, True)
+					threading.Timer(settings.commandCooldownTime,tokens.takeToken, [msg.author.id]).start()
 
 				#command is the first word in the message
 				args = msg.content.split()
